@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const TestComponent = () => {
+const FetchTasks = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -9,7 +9,7 @@ const TestComponent = () => {
     const fetchData = async () => {
       try {
         // Make a GET request to your API endpoint
-        const response = await fetch('http://localhost:5114/api/imagegallery');
+        const response = await fetch('http://localhost:5114/api/imagegallery/tasks');
         
         // Check if the request was successful (status code 2xx)
         if (response.ok) {
@@ -40,19 +40,21 @@ const TestComponent = () => {
 
   return (
     <div>
-      <h1>Test Component</h1>
+  
       {data && (
         <ul>
           {data.map(item => (
-            <>
-            <li key={item.imageID}>{item.uploadDate} - {item.title}</li>
-         
-            </>
+            <div>
+              {item.taskID} {item.taskName}
+           </div>
           ))}
         </ul>
       )}
+      {!data && <p>No data received</p>}
+      {console.log(data)} {/* Add this line for debugging */}
     </div>
   );
+  
 };
 
-export default TestComponent;
+export default FetchTasks;
